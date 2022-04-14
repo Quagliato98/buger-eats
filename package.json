@@ -1,0 +1,22 @@
+{
+  "name": "buger-eats",
+  "version": "1.0.0",
+  "description": "Projeto de testes de aceitaçao do app BugerEats",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Quagliato98/buger-eats.git"
+  },
+  "author": "Andrey Quagliato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Quagliato98/buger-eats/issues"
+  },
+  "homepage": "https://github.com/Quagliato98/buger-eats#readme",
+  "devDependencies": {
+    "cypress": "^9.5.4"
+  }
+}
