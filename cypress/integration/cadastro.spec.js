@@ -7,7 +7,7 @@ describe('Cadastro', ()=>{
 
         var entregador = {
             nome: 'Andrey Quagliato',
-            cpf: '668.220.860-05',
+            cpf: '66822086005',
             email: 'helloworld@gmail.com',
             whatsapp: '81938853874',
             endereco: {
@@ -17,7 +17,9 @@ describe('Cadastro', ()=>{
                 complemento: 'Casa',
                 cidade: 'Nova Cidade',
                 estado: 'Matão/SP'
-            }
+            },
+            metodo_entrega: 'Moto',
+            cnh: 'cnh-digital.jpg'
         }
 
         cy.get('input[name="name"]').type(entregador.nome)
@@ -28,13 +30,19 @@ describe('Cadastro', ()=>{
         cy.get('input[name="postalcode"]').type(entregador.endereco.cep)
         cy.get('.field input[type="button"]').should('have.value', 'Buscar CEP').click()
 
-        cy.get('.field input[name="address"]').should('have.value', 'Avenida José Schimidt')
+        cy.get('.field input[name="address"]').should('have.value', entregador.endereco.rua)
         cy.get('.field input[name="address-number"]').type(entregador.endereco.numero)
         cy.get('.field input[name="address-details"]').type(entregador.endereco.complemento)
-        cy.get('.field input[name="district"]').should('have.value', 'Nova Cidade')
-        cy.get('.field input[name="city-uf"]').should('have.value', 'Matão/SP')
+        cy.get('.field input[name="district"]').should('have.value', entregador.endereco.cidade)
+        cy.get('.field input[name="city-uf"]').should('have.value', entregador.endereco.estado)
 
-        cy.get('.delivery-method img[alt="Bicicleta"]').click()
-        cy.get('button[type="submit"]').should('have.text', 'Cadastre-se para fazer entregas')
+        cy.contains('.delivery-method li', entregador.metodo_entrega).click()
+        cy.get('input[accept^="image"]').selectFile('cypress/fixtures/images/cnh-digital.jpg', {force: true})
+
+        cy.get('form button[type="submit"]').click()
+
+        const expectMessage = 'Recebemos os seus dados. Fique de olho na sua caixa de email, pois e em breve retornamos o contato.'
+
+        cy.get('#swal2-html-container').should('have.text', expectMessage)
     })
 })
