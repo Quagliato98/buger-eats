@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Quagliato98/buger-eats#readme",
   "devDependencies": {
     "cypress": "^9.5.4",
-    "cypress-file-upload": "^5.0.8"
+    "cypress-file-upload": "^5.0.8",
+    "faker": "^6.6.6"
   }
 }
