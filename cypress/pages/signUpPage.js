@@ -1,14 +1,12 @@
-
 class SignupPage {
     go() {
         cy.visit('/')
         cy.get('a[href="/deliver"]').click()
         cy.get('form h1').should('have.text', 'Cadastre-se para  fazer entregas')
-
     }
 
     fillForm(deliver) {
-        cy.get('input[name="name"]').type(deliver.name)
+        cy.get('input[name="fullName"]').type(deliver.name)
         cy.get('input[name="cpf"]').type(deliver.cpf)
         cy.get('input[name="email"]').type(deliver.email)
         cy.get('input[name="whatsapp"]').type(deliver.whatsapp)
@@ -26,20 +24,16 @@ class SignupPage {
         cy.get('input[accept^="image"]').selectFile('cypress/fixtures/images/cnh-digital.jpg', {force: true})
 
     }
-
     submit() {
         cy.get('form button[type="submit"]').click()
 
     }
-
-    modalContentShouldBe(expectMessage) {
-        cy.get('#swal2-html-container').should('have.text', expectMessage)
+    modalContentShouldBe(expectedMessage) {
+        cy.get('#swal2-html-container').should('have.text', expectedMessage)
     }
-
-    alertMessageShouldBe(expectMessage) {
-        cy.get('.alert-error').should('have.text', expectMessage)
-
+    alertMessageShouldBe(expectedMessage) {
+        cy.get('.alert-error').should('have.text', expectedMessage)
     }
 }
 
-export default SignupPage;
+export default new SignupPage;
