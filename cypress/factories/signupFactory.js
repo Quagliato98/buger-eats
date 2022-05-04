@@ -1,11 +1,16 @@
+var faker = require('faker')
+var cpf = require('gerador-validador-cpf')
+
 
 export default {
 
     deliver: function(){
+        var firstName = faker.name.firstName()
+        var lastName = faker.name.lastName()
 
         var data = {
-            name: 'Andrey Quagliato',
-            cpf: '66822086005',
+            name: `${firstName} ${lastName}`,
+            cpf: cpf.generate(),
             email: 'helloworld@gmail.com',
             whatsapp: '81938853874',
             address: {

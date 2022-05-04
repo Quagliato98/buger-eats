@@ -1,5 +1,6 @@
 import signup from '../pages/signUpPage'
 import signupFactory from '../factories/signupFactory'
+import signUpPage from '../pages/signUpPage'
 
 describe('Signup', ()=>{
 
@@ -45,5 +46,29 @@ describe('Signup', ()=>{
         signup.submit()
 
         signup.alertMessageShouldBe('Oops! Email com formato inválido.')
+    })
+
+    context('Required fields', function(){
+        const messages = [
+            {field: 'name', output: 'É necessário informar o nome'},
+            {field: 'cpf', output: 'É necessário informar o CPF'},
+            {field: 'email', output: 'É necessário informar o email'},
+            {field: 'postalcode', output: 'É necessário informar o CEP'},
+            {field: 'number', output: 'É necessário informar o número do endereço'},
+            {field: 'delivery_method', output: 'Selecione o método de entrega'},
+            {field: 'cnh', output: 'Adicione uma foto da sua CNH'}
+
+        ]
+
+        before(function(){
+            signUpPage.go()
+            signUpPage.submit()
+        })
+
+        messages.forEach(function(msg){
+            it(`${msg.field} is required`, function(){
+                signUpPage.alertMessageShouldBe(msg.output)
+            })
+        })
     })
 })
